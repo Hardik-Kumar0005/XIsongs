@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { MusicPlayer } from "@/components/MusicPlayer/MusicPlayer";
-import "./index.css"; // Tailwind styles
+import "./index.css"; 
 
 function App() {
+  useEffect(() => { document.title = 'XI Songs'; }, []);
   return (
     <div className="relative min-h-screen w-full overflow-hidden text-white">
       <div

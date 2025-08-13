@@ -1,5 +1,5 @@
 import React from 'react';
-import danceImg from '/tvbg.jpg';
+import danceImg from '/dancing-tbh.gif';
 
 interface Props {
   trackName: string;
