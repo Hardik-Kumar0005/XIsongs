@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Optional glassmorphism tweaks for the music player */
+:root {
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --music-accent: #f472b6; /* pink-400 */
+  --music-accent-fg: #fff;
+  --music-accent-track: #3f0f2a; /* dark backdrop for filled sections */
+}
+
+/* Music player custom classes */
+.music-button { transition: color .25s, border-color .25s, background .25s; }
+.bg-music-gradient { background: linear-gradient(135deg,#ec4899,#6366f1); }
+.text-music-primary { color: var(--music-accent); }
+
+/* Slider theming specifically for the player (volume & seek) */
+[data-slot=slider-track] { background: linear-gradient(90deg,#1f1f23,#2d0d21); }
+[data-slot=slider-range] { background: linear-gradient(90deg,#ec4899,#6366f1); }
+[data-slot=slider-thumb] { background: #fff; border-color: #f9a8d4; }
+[data-slot=slider-thumb]:focus-visible { box-shadow: 0 0 0 4px #ec48994d; }
+
+/* Card backdrop polish */
+[data-slot=card] { backdrop-filter: blur(28px) saturate(160%) contrast(110%); }
+
+/* Glassmorphism utility */
+.glass-panel {
+  /* Darker translucent layers replacing bright white accents */
+  background: linear-gradient(135deg,rgba(15,15,25,0.72),rgba(15,15,25,0.55) 35%,rgba(10,10,18,0.65));
+  box-shadow: 0 8px 32px -8px rgba(0,0,0,0.65), 0 2px 6px -2px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  position: relative;
+  /* Allow focus rings / slider thumbs to extend without being clipped */
+  overflow: visible;
+}
+.glass-panel:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Subtle dark/accent glows instead of white glare */
+  background:
+    radial-gradient(circle at 18% 12%, rgba(99,102,241,0.18), transparent 60%),
+    radial-gradient(circle at 82% 82%, rgba(236,72,153,0.14), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.35), transparent 70%);
+  pointer-events: none;
+  mix-blend-mode: plus-lighter;
+}
+.glass-border-gradient {
+  position: absolute;
+  inset: 0;
+  padding: 1px; /* border thickness */
+  border-radius: inherit;
+  background: linear-gradient(120deg,rgba(236,72,153,0.6),rgba(99,102,241,0.4),rgba(236,72,153,0.6));
+  mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  pointer-events: none;
+}
+
+/* New frame variant using pseudo-element for safer sizing */
+.glass-frame { position: relative; }
+.glass-frame:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px; /* border thickness */
+  border-radius: inherit;
+  background: linear-gradient(120deg,rgba(236,72,153,0.65),rgba(99,102,241,0.45),rgba(236,72,153,0.65));
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
